@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SEENRY Studio — Brand Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --crimson: #6B1020;
+    --crimson-light: #8B1A2E;
+    --crimson-dark: #3D0812;
+    --bone: #F4F0EB;
+    --warm-white: #FAF8F5;
+    --charcoal: #1A1714;
+    --mid: #6B6560;
+    --gold: #C9A96E;
+    --gold-light: #E8C98A;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--charcoal); overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 4rem; transition: background 0.4s, padding 0.4s; }
+  nav.scrolled { background: rgba(250,248,245,0.96); backdrop-filter: blur(10px); padding: 1rem 4rem; border-bottom: 1px solid rgba(107,16,32,0.12); }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.08em; color: var(--warm-white); text-decoration: none; transition: color 0.3s; }
+  nav.scrolled .nav-logo { color: var(--charcoal); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,248,245,0.8); text-decoration: none; transition: color 0.3s; }
+  nav.scrolled .nav-links a { color: var(--mid); }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { font-size: 0.75rem !important; font-weight: 600 !important; letter-spacing: 0.14em !important; text-transform: uppercase !important; color: var(--charcoal) !important; background: var(--gold); padding: 0.6rem 1.4rem; border-radius: 2px; text-decoration: none; transition: background 0.3s !important; }
+  .nav-cta:hover { background: var(--gold-light) !important; }
+
+  /* HERO */
+  .hero { position: relative; min-height: 100vh; display: flex; align-items: flex-end; padding: 0 4rem 5rem; overflow: hidden; background: var(--charcoal); }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(61,8,18,0.85) 0%, rgba(26,23,20,0.6) 50%, rgba(107,16,32,0.4) 100%); z-index: 1; }
+  .hero-grain { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E"); opacity: 0.4; z-index: 2; pointer-events: none; }
+  .hero-img-bg { position: absolute; inset: 0; background: url('https://i.ibb.co/G4j2M7nC/DANNYJONES-MANUAL-022.jpg') center/cover no-repeat; z-index: 0; }
+  .hero-content { position: relative; z-index: 3; max-width: 900px; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.75rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+  .hero-eyebrow::before { content: ''; width: 2rem; height: 1px; background: var(--gold); }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 12vw, 11rem); line-height: 0.9; letter-spacing: 0.02em; color: var(--warm-white); margin-bottom: 0.2em; }
+  .hero-title span { color: var(--gold); font-family: 'DM Serif Display', serif; font-style: italic; font-size: 0.45em; display: block; letter-spacing: 0.01em; line-height: 1.3; margin-top: 0.2em; }
+  .hero-desc { font-size: 1rem; line-height: 1.7; color: rgba(244,240,235,0.75); max-width: 480px; margin-bottom: 2.5rem; font-weight: 300; }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; }
+  .btn-primary { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--charcoal); background: var(--gold); padding: 1rem 2.2rem; border-radius: 2px; text-decoration: none; transition: background 0.3s, transform 0.2s; }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-ghost { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--warm-white); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid rgba(244,240,235,0.3); padding-bottom: 2px; transition: border-color 0.3s, color 0.3s; }
+  .btn-ghost:hover { color: var(--gold); border-color: var(--gold); }
+  .hero-scroll { position: absolute; bottom: 2.5rem; right: 4rem; z-index: 3; writing-mode: vertical-rl; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(244,240,235,0.5); display: flex; align-items: center; gap: 1rem; }
+  .hero-scroll::after { content: ''; width: 1px; height: 4rem; background: linear-gradient(to bottom, rgba(244,240,235,0.5), transparent); animation: scrollLine 2s ease-in-out infinite; }
+  @keyframes scrollLine { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+  /* MARQUEE */
+  .marquee-section { background: var(--crimson); padding: 1.1rem 0; overflow: hidden; display: flex; }
+  .marquee-track { display: flex; gap: 3rem; animation: marquee 20s linear infinite; white-space: nowrap; }
+  .marquee-track span { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.15em; color: var(--bone); display: flex; align-items: center; gap: 3rem; }
+  .marquee-track span::after { content: '✦'; color: var(--gold); font-size: 0.7rem; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* SECTION BASE */
+  section { padding: 7rem 4rem; }
+  .section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--crimson); display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+  .section-label::before { content: ''; width: 1.5rem; height: 2px; background: var(--crimson); }
+
+  /* INTRO */
+  .intro { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; background: var(--warm-white); }
+  .intro-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.8rem, 5vw, 4.5rem); line-height: 1.05; color: var(--charcoal); margin-bottom: 2rem; }
+  .intro-title em { color: var(--crimson); font-style: italic; }
+  .intro-body { font-size: 1.05rem; line-height: 1.85; color: var(--mid); font-weight: 300; margin-bottom: 1.5rem; }
+  .intro-right { position: relative; }
+  .intro-img-wrap { position: relative; }
+  .intro-img-wrap img { width: 100%; height: 520px; object-fit: cover; display: block; }
+  .intro-img-accent { position: absolute; top: -2rem; right: -2rem; width: 8rem; height: 8rem; background: var(--crimson); z-index: -1; }
+  .intro-img-caption { position: absolute; bottom: -1.5rem; left: -2rem; background: var(--charcoal); color: var(--bone); padding: 1.2rem 1.8rem; font-size: 0.8rem; line-height: 1.5; max-width: 220px; }
+  .intro-img-caption strong { color: var(--gold); display: block; font-size: 1.2rem; font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; }
+
+  /* PHILOSOPHY */
+  .philosophy { background: var(--charcoal); color: var(--bone); position: relative; overflow: hidden; }
+  .philosophy::before { content: ''; position: absolute; top: 0; right: 0; width: 35%; height: 100%; background: url('https://i.ibb.co/fz76MRzs/IMG-0483.jpg') center/cover no-repeat; opacity: 0.12; pointer-events: none; z-index: 0; }
+  .philosophy > * { position: relative; z-index: 1; }
+  .philosophy .section-label { color: var(--gold); }
+  .philosophy .section-label::before { background: var(--gold); }
+  .phil-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 8vw, 8rem); line-height: 0.9; color: var(--warm-white); margin-bottom: 4rem; max-width: 700px; }
+  .phil-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .phil-body { font-size: 1.05rem; line-height: 1.85; color: rgba(244,240,235,0.65); font-weight: 300; }
+  .phil-body + .phil-body { margin-top: 1.5rem; }
+  .villain-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(244,240,235,0.1); }
+  .vh-card { background: rgba(26,23,20,0.8); padding: 2rem; }
+  .vh-card.hero-card { background: var(--crimson-dark); }
+  .vh-tag { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .vh-name { font-family: 'DM Serif Display', serif; font-size: 1.6rem; font-style: italic; color: var(--warm-white); margin-bottom: 0.75rem; }
+  .vh-desc { font-size: 0.85rem; line-height: 1.65; color: rgba(244,240,235,0.55); font-weight: 300; }
+  .phil-quote { margin-top: 3rem; padding: 2rem; border-left: 3px solid var(--gold); font-family: 'DM Serif Display', serif; font-style: italic; font-size: 1.3rem; color: rgba(244,240,235,0.8); line-height: 1.5; }
+
+  /* PILLARS */
+  .pillars { background: var(--bone); }
+  .pillars-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 4rem; }
+  .pillars-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 4vw, 3.8rem); line-height: 1.1; color: var(--charcoal); max-width: 500px; }
+  .pillars-title em { color: var(--crimson); }
+  .pillars-sub { font-size: 0.9rem; color: var(--mid); max-width: 300px; text-align: right; line-height: 1.6; }
+  .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .pillar-card { position: relative; overflow: hidden; cursor: pointer; }
+  .pillar-img { width: 100%; height: 420px; object-fit: cover; display: block; transition: transform 0.6s ease; filter: grayscale(20%); }
+  .pillar-card:hover .pillar-img { transform: scale(1.04); filter: grayscale(0%); }
+  .pillar-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,23,20,0.92) 0%, transparent 55%); transition: background 0.4s; }
+  .pillar-card:hover .pillar-overlay { background: linear-gradient(to top, rgba(61,8,18,0.95) 0%, rgba(61,8,18,0.3) 55%); }
+  .pillar-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem; }
+  .pillar-num { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: rgba(244,240,235,0.12); line-height: 1; margin-bottom: 0.5rem; transition: color 0.3s; }
+  .pillar-card:hover .pillar-num { color: rgba(201,169,110,0.25); }
+  .pillar-name { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.06em; color: var(--warm-white); display: block; margin-bottom: 0.75rem; }
+  .pillar-name span { color: var(--gold); font-family: 'DM Serif Display', serif; font-style: italic; font-size: 1.1rem; display: block; letter-spacing: 0; }
+  .pillar-desc { font-size: 0.85rem; line-height: 1.6; color: rgba(244,240,235,0.65); font-weight: 300; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.4s; opacity: 0; }
+  .pillar-card:hover .pillar-desc { max-height: 100px; opacity: 1; }
+
+  /* FRAMEWORK */
+  .framework { background: var(--warm-white); }
+  .framework-inner { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: start; }
+  .framework-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 4vw, 3.8rem); line-height: 1.1; color: var(--charcoal); margin-bottom: 1.5rem; }
+  .framework-sub { font-size: 0.95rem; color: var(--mid); line-height: 1.7; font-style: italic; margin-bottom: 3rem; }
+  .steps { display: flex; flex-direction: column; }
+  .step { display: flex; gap: 1.5rem; align-items: flex-start; padding: 2rem 0; border-bottom: 1px solid rgba(107,16,32,0.1); }
+  .step:last-child { border-bottom: none; }
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: rgba(107,16,32,0.12); line-height: 1; min-width: 3rem; transition: color 0.3s; }
+  .step:hover .step-num { color: var(--crimson); }
+  .step-name { font-weight: 700; font-size: 1rem; color: var(--charcoal); margin-bottom: 0.4rem; letter-spacing: 0.02em; text-transform: uppercase; }
+  .step-desc { font-size: 0.9rem; color: var(--mid); line-height: 1.6; font-weight: 300; }
+  .framework-right { position: relative; }
+  .framework-img { width: 100%; height: 550px; object-fit: cover; }
+  .framework-badge { position: absolute; top: -2rem; right: -2rem; background: var(--crimson); color: var(--warm-white); width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; letter-spacing: 0.05em; line-height: 1.3; padding: 1rem; }
+
+  /* WORK CAROUSEL */
+  .work { background: var(--charcoal); }
+  .work .section-label { color: var(--gold); }
+  .work .section-label::before { background: var(--gold); }
+  .work-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem; }
+  .work-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 7vw, 7rem); color: var(--warm-white); line-height: 0.9; margin-bottom: 0.5rem; }
+  .work-subtitle { font-size: 0.9rem; color: rgba(244,240,235,0.4); font-weight: 300; }
+  .carousel-nav { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+  .carousel-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(244,240,235,0.15); background: rgba(255,255,255,0.05); color: var(--warm-white); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.25s, border-color 0.25s, transform 0.2s; }
+  .carousel-btn:hover { background: var(--crimson); border-color: var(--crimson); transform: scale(1.08); }
+  .carousel-counter { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: rgba(244,240,235,0.35); letter-spacing: 0.08em; min-width: 60px; text-align: center; }
+  .carousel-counter span { color: var(--gold); }
+  .carousel-viewport { overflow: hidden; position: relative; }
+  .carousel-track { display: flex; transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
+  .carousel-slide { min-width: 100%; display: grid; grid-template-columns: 1fr 1.1fr; gap: 2px; align-items: stretch; }
+
+  /* Phone mockup */
+  .slide-video { background: #0d0d0d; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; min-height: 620px; }
+  .phone-mockup {
+    position: relative;
+    width: 270px;
+    background: #0a0a0a;
+    border-radius: 42px;
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 0 6px #161616, 0 0 0 7px rgba(255,255,255,0.05), 0 40px 80px rgba(0,0,0,0.8);
+    overflow: hidden;
+    aspect-ratio: 9/19.5;
+    flex-shrink: 0;
+  }
+  .phone-mockup::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 80px; height: 26px;
+    background: #0a0a0a;
+    border-radius: 0 0 16px 16px;
+    z-index: 20;
+  }
+  .phone-mockup::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 40px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.07);
+    pointer-events: none;
+    z-index: 19;
+  }
+  .phone-mockup blockquote,
+  .phone-mockup iframe {
+    position: absolute !important;
+    top: 0 !important; left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    min-width: unset !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: 0 !important;
+  }
+  /* Wide mockup for YouTube/landscape */
+  .phone-mockup.wide {
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 16/9;
+    border-radius: 16px;
+  }
+  .phone-mockup.wide::before { display: none; }
+  .phone-mockup.wide::after { border-radius: 14px; }
+
+  /* Info panel */
+  .slide-info { background: rgba(255,255,255,0.025); border-left: 1px solid rgba(255,255,255,0.05); padding: 3rem; display: flex; flex-direction: column; justify-content: space-between; }
+  .slide-num { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; color: rgba(244,240,235,0.05); line-height: 1; }
+  .slide-platform-badge { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(244,240,235,0.4); background: rgba(255,255,255,0.06); padding: 0.35rem 0.8rem; border-radius: 2px; margin-bottom: 1.2rem; margin-top: 1.5rem; width: fit-content; }
+  .slide-handle { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+  .slide-name { font-family: 'DM Serif Display', serif; font-size: 1.9rem; color: var(--warm-white); line-height: 1.1; margin-bottom: 1rem; }
+  .slide-desc { font-size: 0.88rem; line-height: 1.75; color: rgba(244,240,235,0.5); font-weight: 300; }
+  .slide-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.06); border-top: 1px solid rgba(255,255,255,0.06); margin-top: 2rem; }
+  .slide-stat { background: rgba(255,255,255,0.02); padding: 1.2rem 1rem; text-align: center; }
+  .slide-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--gold); line-height: 1; display: block; }
+  .slide-stat-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(244,240,235,0.35); margin-top: 0.2rem; display: block; }
+
+  /* Dots */
+  .carousel-dots { display: flex; gap: 0.5rem; justify-content: center; margin-top: 2.5rem; }
+  .carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(244,240,235,0.2); cursor: pointer; transition: background 0.3s, transform 0.3s; border: none; padding: 0; }
+  .carousel-dot.active { background: var(--gold); transform: scale(1.4); }
+
+  /* FOUNDER */
+  .founder { background: var(--bone); display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0; }
+  .founder-img-side { position: relative; min-height: 600px; background: var(--crimson-dark); }
+  .founder-img-side img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; mix-blend-mode: multiply; filter: contrast(1.05); }
+  .founder-text-side { padding: 6rem 5rem; background: var(--bone); display: flex; flex-direction: column; justify-content: center; }
+  .founder-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.8rem, 4vw, 4rem); line-height: 1.05; color: var(--charcoal); margin-bottom: 0.5rem; }
+  .founder-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.1em; color: var(--crimson); margin-bottom: 2rem; }
+  .founder-body { font-size: 0.95rem; line-height: 1.85; color: var(--mid); font-weight: 300; margin-bottom: 1.5rem; }
+  .founder-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(107,16,32,0.15); }
+  .f-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--crimson); line-height: 1; }
+  .f-stat-label { font-size: 0.75rem; color: var(--mid); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* CTA */
+  .cta-section { background: var(--charcoal); text-align: center; padding: 8rem 4rem; position: relative; overflow: hidden; }
+  .cta-section::before { content: 'SEENRY'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 30vw; color: rgba(107,16,32,0.08); top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; z-index: 0; }
+  .cta-inner { position: relative; z-index: 1; }
+  .cta-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+  .cta-title { font-family: 'DM Serif Display', serif; font-size: clamp(3rem, 6vw, 5.5rem); color: var(--warm-white); line-height: 1.05; margin-bottom: 1.5rem; }
+  .cta-title em { color: var(--gold); }
+  .cta-sub { font-size: 1rem; color: rgba(244,240,235,0.55); max-width: 500px; margin: 0 auto 3rem; line-height: 1.7; }
+  .cta-email { display: inline-flex; align-items: center; gap: 0.75rem; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; color: var(--charcoal); background: var(--gold); padding: 1.1rem 2.5rem; border-radius: 2px; text-decoration: none; transition: background 0.3s, transform 0.2s; }
+  .cta-email:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer { background: var(--crimson-dark); padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.08em; color: var(--bone); }
+  .footer-copy { font-size: 0.75rem; color: rgba(244,240,235,0.4); letter-spacing: 0.05em; }
+  .footer-email { font-size: 0.8rem; color: var(--gold); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s; }
+  .footer-email:hover { color: var(--gold-light); }
+
+  /* ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: none; }
+  .fade-up:nth-child(2) { transition-delay: 0.1s; }
+  .fade-up:nth-child(3) { transition-delay: 0.2s; }
+  .fade-up:nth-child(4) { transition-delay: 0.3s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    nav.scrolled { padding: 0.8rem 2rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 2rem; }
+    .hero { padding: 0 2rem 4rem; }
+    .hero-scroll { display: none; }
+    .intro, .framework-inner, .founder { grid-template-columns: 1fr; }
+    .intro-img-accent, .framework-badge { display: none; }
+    .intro-img-caption { position: static; margin-top: 1rem; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .carousel-slide { grid-template-columns: 1fr; }
+    .slide-video { min-height: auto; padding: 2rem 1rem; }
+    .phone-mockup { width: 220px; }
+    .phone-mockup.wide { max-width: 100%; }
+    .slide-info { padding: 2rem; }
+    .work-header { flex-direction: column; align-items: flex-start; }
+    .villain-hero { grid-template-columns: 1fr; }
+    .phil-grid { grid-template-columns: 1fr; }
+    .pillars-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .pillars-sub { text-align: left; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .founder-img-side { min-height: 400px; }
+    .founder-text-side { padding: 3rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">SE3NRY</a>
+  <ul class="nav-links">
+    <li><a href="#intro">About</a></li>
+    <li><a href="#pillars">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#founder">Founder</a></li>
+    <li><a class="nav-cta" href="#contact">Work With Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img-bg"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Full-Service Marketing Studio</div>
+    <h1 class="hero-title">
+      SEENRY
+      <span>Stop the scroll. Build the scenery.</span>
+    </h1>
+    <p class="hero-desc">We don't just create content — we design digital worlds your audience wants to step into. Social-first, data-backed, culture-led.</p>
+    <div class="hero-actions">
+      <a href="#work" class="btn-primary">See Our Work</a>
+      <a href="#contact" class="btn-ghost">Build Your Scenery →</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span>Brand Strategy</span>
+    <span>Content Creation</span>
+    <span>Influencer Networks</span>
+    <span>Paid Media</span>
+    <span>Social-First Logic</span>
+    <span>Scenery Design</span>
+    <span>Performance Marketing</span>
+    <span>Community Building</span>
+    <span>Brand Strategy</span>
+    <span>Content Creation</span>
+    <span>Influencer Networks</span>
+    <span>Paid Media</span>
+    <span>Social-First Logic</span>
+    <span>Scenery Design</span>
+    <span>Performance Marketing</span>
+    <span>Community Building</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro" id="intro">
+  <div class="intro-left fade-up">
+    <div class="section-label">Who We Are</div>
+    <h2 class="intro-title">Most brands are just <em>background noise.</em></h2>
+    <p class="intro-body">They post because they have to — not because they have something worth watching. The result? Over-polished, algorithm-chasing content that gets ignored.</p>
+    <p class="intro-body">We turn brands into scenery — immersive, culturally relevant content that doesn't just get seen… it gets felt. We capture the raw, the real, and the rhythmic — so when your audience stops scrolling, they don't just see a post. They see a lifestyle they want to be part of.</p>
+  </div>
+  <div class="intro-right fade-up">
+    <div class="intro-img-wrap">
+      <div class="intro-img-accent"></div>
+      <img src="https://i.ibb.co/gYP1ymX/GDOR7613.jpg" alt="SEENRY Studio" />
+      <div class="intro-img-caption">
+        <strong>seenrystudio@gmail.com</strong>
+        Where boardroom meets algorithm
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div class="section-label">Our Philosophy</div>
+  <h2 class="phil-title">The Static<br/>vs. The<br/>Scenery</h2>
+  <div class="phil-grid">
+    <div class="fade-up">
+      <p class="phil-body">Traditional agencies build a big campaign, then try to shrink it down for TikTok — and it feels fake. We start with our phone, the comment section, the trend, and build up from culture. Not down from the boardroom.</p>
+      <div class="phil-quote">"We speak the native language of the internet so your brand doesn't sound like a tourist."</div>
+    </div>
+    <div class="phil-right fade-up">
+      <div class="villain-hero">
+        <div class="vh-card">
+          <div class="vh-tag">The Villain</div>
+          <div class="vh-name">The Static</div>
+          <p class="vh-desc">Millions of boring, overpolished, robotic posts that everyone swipes past — noise that costs money and moves no one.</p>
+        </div>
+        <div class="vh-card hero-card">
+          <div class="vh-tag">The Hero</div>
+          <div class="vh-name">SEENRY</div>
+          <p class="vh-desc">The curator who stops the scroll by creating an environment — the scenery — where a brand can truly be seen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars" id="pillars">
+  <div class="pillars-header">
+    <div>
+      <div class="section-label">Services</div>
+      <h2 class="pillars-title">Three pillars.<br/><em>One vision.</em></h2>
+    </div>
+    <p class="pillars-sub">Every client is placed into the pillar that best matches their world — then we build from there.</p>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar-card fade-up">
+      <img class="pillar-img" src="https://i.ibb.co/21ZfbgGT/LBOC9292-2.jpg" alt="The Pulse" />
+      <div class="pillar-overlay"></div>
+      <div class="pillar-content">
+        <div class="pillar-num">01</div>
+        <span class="pillar-name">The Pulse<span>Artists · Culture · Sport</span></span>
+        <p class="pillar-desc">We capture the sweat in the studio and the energy on stage. We turn sounds into scenery — authentic content that moves as fast as the culture it lives in.</p>
+      </div>
+    </div>
+    <div class="pillar-card fade-up">
+      <img class="pillar-img" src="https://i.ibb.co/5WHx3KCv/IMG-8504.png" alt="The Presence" />
+      <div class="pillar-overlay"></div>
+      <div class="pillar-content">
+        <div class="pillar-num">02</div>
+        <span class="pillar-name">The Presence<span>Events · Weddings · Moments</span></span>
+        <p class="pillar-desc">We are the silent observers capturing the in-between moments so you can stay fully present. Every blink, every laugh — preserved in its most natural form.</p>
+      </div>
+    </div>
+    <div class="pillar-card fade-up">
+      <img class="pillar-img" src="https://i.ibb.co/WpN6R8Mt/Baked-Co-15.jpg" alt="The Proof" />
+      <div class="pillar-overlay"></div>
+      <div class="pillar-content">
+        <div class="pillar-num">03</div>
+        <span class="pillar-name">The Proof<span>Brands · Growth · Community</span></span>
+        <p class="pillar-desc">We use social-first content to prove your value, build your community, and convert followers into fans — then into loyal customers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FRAMEWORK -->
+<section class="framework" id="framework">
+  <div class="framework-inner">
+    <div class="fade-up">
+      <div class="section-label">How We Work</div>
+      <h2 class="framework-title">The Strategy Framework</h2>
+      <p class="framework-sub">Our proprietary four-step methodology that delivers measurable results — every time.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <div class="step-name">Audit & Attribution</div>
+            <p class="step-desc">We identify where current content is leaking ROI and where performance can be optimized — giving you a clear-eyed baseline before we build.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <div class="step-name">Scenery Design</div>
+            <p class="step-desc">We develop the visual "vibe" that resonates with your target subculture — drawing from The Pulse, The Presence, or The Proof.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <div class="step-name">The Influencer Engine</div>
+            <p class="step-desc">We build and manage networks of influencers to drive organic acquisition — targeting 30%+ of total growth through authentic voices.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-body">
+            <div class="step-name">Scale & Surfacing</div>
+            <p class="step-desc">We use winning organic Scenery to fuel high-performance paid ads and CRM funnels — amplifying what already works.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="framework-right fade-up">
+      <img class="framework-img" src="https://i.ibb.co/YF8wXhyR/Screenshot-2026-04-22-at-07-59-29.png" alt="Strategy at work" />
+    </div>
+  </div>
+</section>
+
+<!-- WORK CAROUSEL -->
+<section class="work" id="work">
+  <div class="section-label">Content Portfolio</div>
+  <div class="work-header">
+    <div>
+      <h2 class="work-title">Our<br/>Work</h2>
+      <p class="work-subtitle">Examples of our brand collaborations and impact.</p>
+    </div>
+    <div class="carousel-nav">
+      <button class="carousel-btn" id="prevBtn" aria-label="Previous">&#8592;</button>
+      <div class="carousel-counter"><span id="currentSlide">1</span> / 6</div>
+      <button class="carousel-btn" id="nextBtn" aria-label="Next">&#8594;</button>
+    </div>
+  </div>
+
+  <div class="carousel-viewport">
+    <div class="carousel-track" id="carouselTrack">
+
+      <!-- SLIDE 1: Danny Jones -->
+      <div class="carousel-slide">
+        <div class="slide-video">
+          <div class="phone-mockup">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DAqAVoStjWL/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+          </div>
+        </div>
+        <div class="slide-info">
+          <div class="slide-num">01</div>
+          <div>
+            <div class="slide-platform-badge">📱 Instagram Reel</div>
+            <div class="slide-handle">@dannyjonesofficial</div>
+            <div class="slide-name">Danny Jones · McFly</div>
+            <p class="slide-desc">I'm A Celebrity 2024 King of the Jungle. McFly singer & guitarist with 1M+ followers. Sharing his journey on how he got his confidence back.</p>
+          </div>
+          <div class="slide-stats">
+            <div class="slide-stat"><span class="slide-stat-num">260K</span><span class="slide-stat-label">Views</span></div>
+            <div class="slide-stat"><span class="slide-stat-num">7K</span><span class="slide-stat-label">Likes</span></div>
+            <div class="slide-stat"><span class="slide-stat-num">150</span><span class="slide-stat-label">Comments</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: Joe Hart -->
+      <div class="carousel-slide">
+        <div class="slide-video">
+          <div class="phone-mockup">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DPE_qqtjD50/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+          </div>
+        </div>
+        <div class="slide-info">
+          <div class="slide-num">02</div>
+          <div>
+            <div class="slide-platform-badge">📱 Instagram Reel</div>
+            <div class="slide-handle">@joehartofficial</div>
+            <div class="slide-name">Joe Hart</div>
+            <p class="slide-desc">England & Manchester City goalkeeper legend, speaking up about how much more comfortable he feels within himself after addressing a part of his identity.</p>
+          </div>
+          <div class="slide-stats">
+            <div class="slide-stat"><span class="slide-stat-num">143K</span><span class="slide-stat-label">Views</span></div>
+            <div class="slide-stat"><span class="slide-stat-num">3K</span><span class="slide-stat-label">Likes</span></div>
+            <div class="slide-stat"><span class="slide-stat-num">100</span><span class="slide-stat-label">Comments</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: Regal Gentleman -->
+      <div class="carousel-slide">
+        <div class="slide-video">
+          <div class="phone-mockup">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C_OZZQdupq9/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+          </div>
+        </div>
+        <div class="slide-info">
+          <div class="slide-num">03</div>
+          <div>
+            <div class="slide-platform-badge">📱 Instagram Reel</div>
+            <div class="slide-handle">@regalgentleman</div>
+            <div class="slide-name">Dan Gregory<br/>Regal Gentleman</div>
+            <p class="slide-desc">GQ magazine-featured London barber, opening his chair to men with hair loss and showing how they can own their confidence.</p>
+          </div>
+          <div class="slide-stats">
+            <div class="slide-stat"><span class="slide-stat-num">—</span><span class="slide-stat-label">Views</span></div>
+            <div class="slide-stat"><span class="slide-stat-num">—</span><span class="slide-stat-label">Likes</span></div>
+            <div class="slide-stat"><span class="slide-stat-num">—</span><span class="slide-stat-label">Comments</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: Sam Cornforth -->
+      <div class="carousel-slide">
+        <div class="slide-video">
+          <div class="phone-mockup">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DN-dNtviOqw/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+          </div>
+        </div>
+        <div class="slide-info">
+          <div class="slide-num">04</div>
+          <div>
+            <div class="slide-platform-badge">📱 Instagram Reel</div>
+            <div class="slide-handle">@samcforth</div>
+            <div class="slide-name">Sam Cornforth</div>
+            <p class="slide-desc">Content creator and personality. Shaping his natural storytelling into a series of how he's chasing his hairline.</p>
+          </div>
+          <div class="slide-stats">
+            <div class="slide-stat"><span class="slide-stat-num">600K</span><span class="slide-stat-label">Views</span></div>
+            <div class="slide-stat"><span class="slide-stat-num">11K</span><span class="slide-stat-label">Likes</span></div>
+            <div class="slide-stat"><span class="slide-stat-num">220</span><span class="slide-stat-label">Comments</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: Liefde by die Dam -->
+      <div class="carousel-slide">
+        <div class="slide-video">
+          <div class="phone-mockup">
+            <iframe src="https://www.tiktok.com/embed/v2/7630453239606955272" allowfullscreen allow="encrypted-media;"></iframe>
+          </div>
+        </div>
+        <div class="slide-info">
+          <div class="slide-num">05</div>
+          <div>
+            <div class="slide-platform-badge">🎵 TikTok</div>
+            <div class="slide-handle">@liefdebydiedam</div>
+            <div class="slide-name">Liefde by<br/>die Dam</div>
+            <p class="slide-desc">Afrikaans music event. SEENRY shaped the strategy and co-created TikTok-native content rooted in authentic South African storytelling — connecting a community around a shared identity.</p>
+          </div>
+          <div class="slide-stats">
+            <div class="slide-stat"><span class="slide-stat-num">16.8K</span><span class="slide-stat-label">Views</span></div>
+            <div class="slide-stat"><span class="slide-stat-num">1K</span><span class="slide-stat-label">Likes</span></div>
+            <div class="slide-stat"><span class="slide-stat-num">200</span><span class="slide-stat-label">Saves</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 6: Calfreezy -->
+      <div class="carousel-slide">
+        <div class="slide-video">
+          <div class="phone-mockup wide">
+            <iframe src="https://www.youtube.com/embed/sX0bZ63F-wU" title="Calfreezy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+          </div>
+        </div>
+        <div class="slide-info">
+          <div class="slide-num">06</div>
+          <div>
+            <div class="slide-platform-badge">▶ YouTube</div>
+            <div class="slide-handle">@calfreezy</div>
+            <div class="slide-name">Calfreezy</div>
+            <p class="slide-desc">One of the UK's top YouTube influencers with millions of subscribers. Bringing social-first thinking to long-form content, catching viewers off guard for retention and conversion.</p>
+          </div>
+          <div class="slide-stats">
+            <div class="slide-stat"><span class="slide-stat-num">1.8M</span><span class="slide-stat-label">Views</span></div>
+            <div class="slide-stat"><span class="slide-stat-num">36K</span><span class="slide-stat-label">Likes</span></div>
+            <div class="slide-stat"><span class="slide-stat-num">1.6K</span><span class="slide-stat-label">Comments</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="carousel-dots" id="carouselDots">
+    <button class="carousel-dot active" data-index="0"></button>
+    <button class="carousel-dot" data-index="1"></button>
+    <button class="carousel-dot" data-index="2"></button>
+    <button class="carousel-dot" data-index="3"></button>
+    <button class="carousel-dot" data-index="4"></button>
+    <button class="carousel-dot" data-index="5"></button>
+  </div>
+</section>
+
+<script async src="//www.instagram.com/embed.js"></script>
+
+<!-- FOUNDER -->
+<section class="founder" id="founder">
+  <div class="founder-img-side">
+    <img src="https://i.ibb.co/xt1mg06f/Screenshot-2026-04-22-at-07-59-20.png" alt="Tanya van der Merwe — Founder" />
+  </div>
+  <div class="founder-text-side fade-up">
+    <div class="section-label">The Founder</div>
+    <h2 class="founder-title">The Founder's Vision</h2>
+    <div class="founder-name">Tanya van der Merwe</div>
+    <p class="founder-body">I built SEENRY Studio on a single conviction: a brand's story and its performance data should never be at odds. My career has been spent in the trenches of high-growth marketing, scaling influencer networks from zero into multi-million pound acquisition engines.</p>
+    <p class="founder-body">I've proven you can drive a 50% reduction in CAC while delivering 30% organic growth — not by shouting louder, but by creating better scenery. SEENRY is the bridge between the boardroom and the algorithm: where high-level strategy meets social-first soul.</p>
+    <div class="founder-stats">
+      <div class="f-stat"><div class="f-stat-num">50%</div><div class="f-stat-label">CAC Reduction</div></div>
+      <div class="f-stat"><div class="f-stat-num">30%+</div><div class="f-stat-label">Organic Growth</div></div>
+      <div class="f-stat"><div class="f-stat-num">£M+</div><div class="f-stat-label">Acquisition Scaled</div></div>
+      <div class="f-stat"><div class="f-stat-num">3</div><div class="f-stat-label">Core Pillars Built</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <div class="cta-eyebrow">Ready to be seen?</div>
+    <h2 class="cta-title">Stop blending in.<br/><em>Start being seen.</em></h2>
+    <p class="cta-sub">Let's design your scenery. Whether you're a brand, artist, or event — we'll make your audience stop scrolling and start watching.</p>
+    <a href="mailto:seenrystudio@gmail.com" class="cta-email">✉ seenrystudio@gmail.com</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SE3NRY Studio</div>
+  <div class="footer-copy">© 2026 SEENRY Studio. All rights reserved.</div>
+  <a href="mailto:seenrystudio@gmail.com" class="footer-email">seenrystudio@gmail.com</a>
+</footer>
+
+<script>
+  // Sticky nav
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+
+  // Fade-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Carousel — NO auto-scroll
+  const track = document.getElementById('carouselTrack');
+  const dots = document.querySelectorAll('.carousel-dot');
+  const currentSlideEl = document.getElementById('currentSlide');
+  const total = 6;
+  let current = 0;
+
+  function goTo(index) {
+    current = (index + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    if (currentSlideEl) currentSlideEl.textContent = current + 1;
+    if (window.instgrm) window.instgrm.Embeds.process();
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+  dots.forEach(dot => dot.addEventListener('click', () => goTo(+dot.dataset.index)));
+
+  // Swipe
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const diff = tx - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+  }, { passive: true });
+</script>
+</body>
+</html>
