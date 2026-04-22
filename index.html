@@ -37,7 +37,7 @@
   .hero { position: relative; min-height: 100vh; display: flex; align-items: flex-end; padding: 0 4rem 5rem; overflow: hidden; background: var(--charcoal); }
   .hero-bg { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(61,8,18,0.85) 0%, rgba(26,23,20,0.6) 50%, rgba(107,16,32,0.4) 100%); z-index: 1; }
   .hero-grain { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E"); opacity: 0.4; z-index: 2; pointer-events: none; }
-  .hero-img-bg { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1800&q=80') center/cover no-repeat; z-index: 0; }
+  .hero-img-bg { position: absolute; inset: 0; background: url('https://i.ibb.co/G4j2M7nC/DANNYJONES-MANUAL-022.jpg') center/cover no-repeat; z-index: 0; }
   .hero-content { position: relative; z-index: 3; max-width: 900px; }
   .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.75rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
   .hero-eyebrow::before { content: ''; width: 2rem; height: 1px; background: var(--gold); }
@@ -78,7 +78,9 @@
   .intro-img-caption strong { color: var(--gold); display: block; font-size: 1.2rem; font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; }
 
   /* PHILOSOPHY */
-  .philosophy { background: var(--charcoal); color: var(--bone); }
+  .philosophy { background: var(--charcoal); color: var(--bone); position: relative; overflow: hidden; }
+  .philosophy::before { content: ''; position: absolute; top: 0; right: 0; width: 35%; height: 100%; background: url('https://i.ibb.co/fz76MRzs/IMG-0483.jpg') center/cover no-repeat; opacity: 0.12; pointer-events: none; z-index: 0; }
+  .philosophy > * { position: relative; z-index: 1; }
   .philosophy .section-label { color: var(--gold); }
   .philosophy .section-label::before { background: var(--gold); }
   .phil-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 8vw, 8rem); line-height: 0.9; color: var(--warm-white); margin-bottom: 4rem; max-width: 700px; }
@@ -348,7 +350,7 @@
   <div class="intro-right fade-up">
     <div class="intro-img-wrap">
       <div class="intro-img-accent"></div>
-      <img src="https://i.ibb.co/prMBDJnD/Home.jpg" alt="SEENRY Studio" />
+      <img src="https://i.ibb.co/gYP1ymX/GDOR7613.jpg" alt="SEENRY Studio" />
       <div class="intro-img-caption">
         <strong>seenrystudio@gmail.com</strong>
         Where boardroom meets algorithm
@@ -394,7 +396,7 @@
   </div>
   <div class="pillars-grid">
     <div class="pillar-card fade-up">
-      <img class="pillar-img" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=900&q=80" alt="The Pulse" />
+      <img class="pillar-img" src="https://i.ibb.co/21ZfbgGT/LBOC9292-2.jpg" alt="The Pulse" />
       <div class="pillar-overlay"></div>
       <div class="pillar-content">
         <div class="pillar-num">01</div>
@@ -403,7 +405,7 @@
       </div>
     </div>
     <div class="pillar-card fade-up">
-      <img class="pillar-img" src="https://images.unsplash.com/photo-1519741497674-611481863552?w=900&q=80" alt="The Presence" />
+      <img class="pillar-img" src="https://i.ibb.co/5WHx3KCv/IMG-8504.png" alt="The Presence" />
       <div class="pillar-overlay"></div>
       <div class="pillar-content">
         <div class="pillar-num">02</div>
@@ -412,7 +414,7 @@
       </div>
     </div>
     <div class="pillar-card fade-up">
-      <img class="pillar-img" src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80" alt="The Proof" />
+      <img class="pillar-img" src="https://i.ibb.co/WpN6R8Mt/Baked-Co-15.jpg" alt="The Proof" />
       <div class="pillar-overlay"></div>
       <div class="pillar-content">
         <div class="pillar-num">03</div>
@@ -462,8 +464,7 @@
       </div>
     </div>
     <div class="framework-right fade-up">
-      <div class="framework-badge">Proprietary<br/>Method<br/>2026</div>
-      <img class="framework-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80" alt="Strategy at work" />
+      <img class="framework-img" src="https://i.ibb.co/YF8wXhyR/Screenshot-2026-04-22-at-07-59-29.png" alt="Strategy at work" />
     </div>
   </div>
 </section>
@@ -473,8 +474,8 @@
   <div class="section-label">Content Portfolio</div>
   <div class="work-header">
     <div>
-      <h2 class="work-title">Selected<br/>Work</h2>
-      <p class="work-subtitle">Real content. Real results. Six influencers. One studio.</p>
+      <h2 class="work-title">Our<br/>Work</h2>
+      <p class="work-subtitle">Examples of our brand collaborations and impact.</p>
     </div>
     <div class="carousel-nav">
       <button class="carousel-btn" id="prevBtn" aria-label="Previous">&#8592;</button>
@@ -642,7 +643,7 @@
 <!-- FOUNDER -->
 <section class="founder" id="founder">
   <div class="founder-img-side">
-    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" alt="Tanya van der Merwe — Founder" />
+    <img src="https://i.ibb.co/xt1mg06f/Screenshot-2026-04-22-at-07-59-20.png" alt="Tanya van der Merwe — Founder" />
   </div>
   <div class="founder-text-side fade-up">
     <div class="section-label">The Founder</div>
